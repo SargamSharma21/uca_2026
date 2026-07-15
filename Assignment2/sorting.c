@@ -125,72 +125,72 @@ void swap(int a[], int i, int j) {
 //     }
 // }
 
-// int partition(int a[], int low, int high) {
+int partition(int a[], int low, int high) {
 
-//     int pivot = a[high];
-//     int i = low - 1;
-//     int j;
+    int pivot = a[high];
+    int i = low - 1;
+    int j;
 
-//     for(j = low; j < high; j++) {
+    for(j = low; j < high; j++) {
 
-//         if(a[j] < pivot) {
+        if(a[j] < pivot) {
 
-//             i++;
-//             swap(a, i, j);
-//         }
-//     }
+            i++;
+            swap(a, i, j);
+        }
+    }
 
-//     swap(a, i + 1, high);
+    swap(a, i + 1, high);
 
-//     return i + 1;
-// }
+    return i + 1;
+}
 
-// void QuiSort(int a[], int low, int high) {
+void QuiSort(int a[], int low, int high) {
 
-//     if(low < high) {
+    if(low < high) {
 
-//         int p = partition(a, low, high);
+        int p = partition(a, low, high);
 
-//         QuiSort(a, low, p - 1);
-//         QuiSort(a, p + 1, high);
-//     }
-// }
-
-
-void heapify(int a[], int n, int i) {
-
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
-
-    if(left < n && a[left] > a[largest])
-        largest = left;
-
-    if(right < n && a[right] > a[largest])
-        largest = right;
-
-    if(largest != i) {
-
-        swap(a, i, largest);
-
-        heapify(a, n, largest);
+        QuiSort(a, low, p - 1);
+        QuiSort(a, p + 1, high);
     }
 }
 
-void Sort(int a[], int n) {
 
-    int i;
+// void heapify(int a[], int n, int i) {
 
-    for(i = n / 2 - 1; i >= 0; i--)
-        heapify(a, n, i);
+//     int largest = i;
+//     int left = 2 * i + 1;
+//     int right = 2 * i + 2;
 
-    for(i = n - 1; i > 0; i--) {
+//     if(left < n && a[left] > a[largest])
+//         largest = left;
 
-        swap(a, 0, i);
+//     if(right < n && a[right] > a[largest])
+//         largest = right;
 
-        heapify(a, i, 0);
-    }
-}
+//     if(largest != i) {
+
+//         swap(a, i, largest);
+
+//         heapify(a, n, largest);
+//     }
+// }
+
+// void Sort(int a[], int n) {
+
+//     int i;
+
+//     for(i = n / 2 - 1; i >= 0; i--)
+//         heapify(a, n, i);
+
+//     for(i = n - 1; i > 0; i--) {
+
+//         swap(a, 0, i);
+
+//         heapify(a, i, 0);
+//     }
+// }
 
 void print(int a[] , int s){
     int i;
@@ -208,15 +208,15 @@ int main(){
     for(i = 0; i < 8; i++){
         int a[size];
 
-        generateRandom(a, size);
+        // generateRandom(a, size);
         // generateAscending(a, size);
-        // generateDescending(a, size);
+        generateDescending(a, size);
         // print(a, size);
 
         gettimeofday(&te, NULL);
         long long start = te.tv_sec * 1000LL + te.tv_usec / 1000;
 
-        Sort(a, size);
+        QuiSort(a, 0 ,size);
 
         gettimeofday(&te, NULL);
         long long end = te.tv_sec * 1000LL + te.tv_usec / 1000;
