@@ -88,7 +88,7 @@ int main(){
         gettimeofday(&te, NULL);
         long long start = te.tv_sec * 1000LL + te.tv_usec / 1000;
 
-        QuiSort(a, 0 ,size);
+        Sort(a ,size);
 
         gettimeofday(&te, NULL);
         long long end = te.tv_sec * 1000LL + te.tv_usec / 1000;
